@@ -12,6 +12,4 @@ let initApp = async (appConfig, dbConfig) => {
         process.exit(0)
     }
 }
-
-
-initApp(appConfig,dbConfig)
+initApp(appConfig, dbConfig)

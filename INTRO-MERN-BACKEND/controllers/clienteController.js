@@ -1,5 +1,4 @@
 const Cliente = require('../models/Cliente')
-
 async function addCliente (req,res) {
     try {
         const {

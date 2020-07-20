@@ -1,24 +1,23 @@
 import React, { useState,useEffect }  from 'react'
 import { Button } from 'react-bulma-components'
+import { getProducts } from '../services/index'
 import Loading from './Loading'
-
 
 const ListProducts = () => {
     const [isLoading, setIsLoading] = useState(true)
-
-    useEffect(()=>{
-        const timeId =setInterval(() => {
-            console.log('use efect!!');
-            setIsLoading(!isLoading)
-        }, 2000)
-        /* setIsLoading(false) */
-        return ()=>clearInterval(timeId)
-    })
-
+    const [products, setProducts] = useState([])
     
-    useEffect(()=>{
-        console.log('only once time');
-    }, [isLoading])
+    useEffect( ()=>{
+        async function loadProducts (){
+            const response = await getProducts()
+            //console.log(response)
+            if(response.status === 200){
+                console.log(response.data.products);
+                setProducts(response.data.products)
+            }
+        }
+        loadProducts()
+    },[])
     return (<>
     <Button onClick={()=>setIsLoading(!isLoading)}>update</Button>
             {isLoading 
